@@ -14,6 +14,12 @@ function fetchAnimals(e) {
   const animal = document.querySelector("#animal").value;
   const zip = document.querySelector("#zip").value;
 
+   // Validate Zip
+   if (!isValidZip(zip)) {
+    showAlert('Please Enter A Valid Zipcode', 'danger');
+    return;
+  }
+
   // fetch Pets
 
   let key = process.env.PETFINDER_API_KEY;
@@ -73,11 +79,28 @@ function showAnimals(pets) {
         <div class="col-sm-6">
           <h4>${pet.name} (${pet.age})</h4>
           <p class="text-secondary">${pet.breeds.primary}</p>
-          <p>${pet.contact.address.city}, ${pet.contact.address.state} ${pet.contact.address.postcode}</p>
+          <p>${pet.contact.address.city}, ${pet.contact.address.state} ${
+      pet.contact.address.postcode
+    }</p>
+          <ul class="list-group">
+            <li class="list-group-item">${
+              pet.contact.phone
+                ? `<li class="list-group-item">Phone: ${pet.contact.phone}</li>`
+                : ``
+            }</li>
+            ${
+              pet.contact.email
+                ? `<li class="list-group-item">Email: ${pet.contact.email}</li>`
+                : ``
+            }
+            <li class="list-group-item">Shelter ID: ${pet.organization_id}</li>
+          </ul>
         
         </div>
         <div class="col-sm-6">
-        
+        <img class="img-fluid rounded-circle mt-2" src="${
+          pet.photos[0] ? pet.photos[0].medium : ""
+        }">
 
         </div>
       </div>

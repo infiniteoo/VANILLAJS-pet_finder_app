@@ -970,7 +970,13 @@ function fetchAnimals(e) {
   e.preventDefault(); // Get user Input
 
   var animal = document.querySelector("#animal").value;
-  var zip = document.querySelector("#zip").value; // fetch Pets
+  var zip = document.querySelector("#zip").value; // Validate Zip
+
+  if (!isValidZip(zip)) {
+    showAlert('Please Enter A Valid Zipcode', 'danger');
+    return;
+  } // fetch Pets
+
 
   var key = "qc93eVT1YGvb1FfRaUl1nCVUeOfJoeit52Ac6AkM0tIpTv4P4f";
   var secret = "FKAaFCeDID25wH37yHLbXPmlGtcdNB8QsKirfJAw";
@@ -1016,7 +1022,7 @@ function showAnimals(pets) {
 
     var div = document.createElement("div");
     div.classList.add("card", "card-body", "mb-3");
-    div.innerHTML = "\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <h4>".concat(pet.name, " (").concat(pet.age, ")</h4>\n          <p class=\"text-secondary\">").concat(pet.breeds.primary, "</p>\n          <p>").concat(pet.contact.address.city, ", ").concat(pet.contact.address.state, " ").concat(pet.contact.address.postcode, "</p>\n        \n        </div>\n        <div class=\"col-sm-6\">\n        \n\n        </div>\n      </div>\n\n    ");
+    div.innerHTML = "\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <h4>".concat(pet.name, " (").concat(pet.age, ")</h4>\n          <p class=\"text-secondary\">").concat(pet.breeds.primary, "</p>\n          <p>").concat(pet.contact.address.city, ", ").concat(pet.contact.address.state, " ").concat(pet.contact.address.postcode, "</p>\n          <ul class=\"list-group\">\n            <li class=\"list-group-item\">").concat(pet.contact.phone ? "<li class=\"list-group-item\">Phone: ".concat(pet.contact.phone, "</li>") : "", "</li>\n            ").concat(pet.contact.email ? "<li class=\"list-group-item\">Email: ".concat(pet.contact.email, "</li>") : "", "\n            <li class=\"list-group-item\">Shelter ID: ").concat(pet.organization_id, "</li>\n          </ul>\n        \n        </div>\n        <div class=\"col-sm-6\">\n        <img class=\"img-fluid rounded-circle mt-2\" src=\"").concat(pet.photos[0] ? pet.photos[0].medium : "", "\">\n\n        </div>\n      </div>\n\n    ");
     results.appendChild(div);
   });
 }
