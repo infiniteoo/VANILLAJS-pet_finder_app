@@ -974,7 +974,8 @@ function fetchAnimals(e) {
 
   var key = "qc93eVT1YGvb1FfRaUl1nCVUeOfJoeit52Ac6AkM0tIpTv4P4f";
   var secret = "FKAaFCeDID25wH37yHLbXPmlGtcdNB8QsKirfJAw";
-  var token;
+  var token; // get authorization token
+
   fetch("https://api.petfinder.com/v2/oauth2/token", {
     method: "POST",
     body: "grant_type=client_credentials&client_id=" + key + "&client_secret=" + secret,
@@ -986,6 +987,7 @@ function fetchAnimals(e) {
   }).then(function (data) {
     token = data.access_token;
   }).then(function (res2) {
+    // use token to fetch animals
     fetch("https://api.petfinder.com/v2/animals?type=".concat(animal, "&location=").concat(zip), {
       method: "GET",
       mode: "cors",
@@ -996,10 +998,26 @@ function fetchAnimals(e) {
     }).then(function (res3) {
       return res3.json();
     }).then(function (data) {
-      return console.log(data);
+      return showAnimals(data.animals);
     });
   }).catch(function (err) {
     return console.error(err);
+  });
+} // show listings of pets
+
+
+function showAnimals(pets) {
+  var results = document.querySelector("#results"); // clear results first
+
+  results.innerHTML = ""; // loop through pets
+
+  pets.forEach(function (pet) {
+    console.log(pet); // create elements
+
+    var div = document.createElement("div");
+    div.classList.add("card", "card-body", "mb-3");
+    div.innerHTML = "\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <h4>".concat(pet.name, " (").concat(pet.age, ")</h4>\n        \n        </div>\n        <div class=\"col-sm-6\">\n        \n\n        </div>\n      </div>\n\n    ");
+    results.appendChild(div);
   });
 }
 },{"fetch-jsonp":"node_modules/fetch-jsonp/build/fetch-jsonp.js","dotenv":"node_modules/dotenv/lib/main.js"}],"C:/Users/troyd/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

@@ -20,6 +20,7 @@ function fetchAnimals(e) {
   let secret = process.env.PETFINDER_API_SECRET_KEY;
   let token;
 
+  // get authorization token
   fetch("https://api.petfinder.com/v2/oauth2/token", {
     method: "POST",
     body:
@@ -36,6 +37,7 @@ function fetchAnimals(e) {
       token = data.access_token;
     })
     .then((res2) => {
+      // use token to fetch animals
       fetch(
         `https://api.petfinder.com/v2/animals?type=${animal}&location=${zip}`,
         {
@@ -48,7 +50,37 @@ function fetchAnimals(e) {
         }
       )
         .then((res3) => res3.json())
-        .then((data) => console.log(data));
+        .then((data) => showAnimals(data.animals));
     })
     .catch((err) => console.error(err));
+}
+
+// show listings of pets
+function showAnimals(pets) {
+  const results = document.querySelector("#results");
+
+  // clear results first
+  results.innerHTML = "";
+
+  // loop through pets
+  pets.forEach((pet) => {
+    console.log(pet);
+    // create elements
+    const div = document.createElement("div");
+    div.classList.add("card", "card-body", "mb-3");
+    div.innerHTML = `
+      <div class="row">
+        <div class="col-sm-6">
+          <h4>${pet.name} (${pet.age})</h4>
+        
+        </div>
+        <div class="col-sm-6">
+        
+
+        </div>
+      </div>
+
+    `;
+    results.appendChild(div);
+  });
 }
