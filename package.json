@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/infiniteoo/VANILLAJS-pet_finder_app/issues"
   },
-  "homepage": "https://github.com/infiniteoo/VANILLAJS-pet_finder_app#readme"
+  "homepage": "https://github.com/infiniteoo/VANILLAJS-pet_finder_app#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "fetch-jsonp": "^1.2.1"
+  }
 }
