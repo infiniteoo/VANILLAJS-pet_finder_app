@@ -1016,7 +1016,7 @@ function showAnimals(pets) {
 
     var div = document.createElement("div");
     div.classList.add("card", "card-body", "mb-3");
-    div.innerHTML = "\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <h4>".concat(pet.name, " (").concat(pet.age, ")</h4>\n          <p class=\"text-secondary\">").concat(pet.breeds.primary, "</p>\n        \n        </div>\n        <div class=\"col-sm-6\">\n        \n\n        </div>\n      </div>\n\n    ");
+    div.innerHTML = "\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <h4>".concat(pet.name, " (").concat(pet.age, ")</h4>\n          <p class=\"text-secondary\">").concat(pet.breeds.primary, "</p>\n          <p>").concat(pet.contact.address.city, ", ").concat(pet.contact.address.state, " ").concat(pet.contact.address.postcode, "</p>\n        \n        </div>\n        <div class=\"col-sm-6\">\n        \n\n        </div>\n      </div>\n\n    ");
     results.appendChild(div);
   });
 }
