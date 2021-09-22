@@ -72,6 +72,7 @@ function showAnimals(pets) {
       <div class="row">
         <div class="col-sm-6">
           <h4>${pet.name} (${pet.age})</h4>
+          <p class="text-secondary">${pet.breeds.primary}</p>
         
         </div>
         <div class="col-sm-6">
