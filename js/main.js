@@ -1,4 +1,5 @@
-import fetchJsonp from "fetch-jsonp";
+import { isValidZip, showAlert } from "./validate";
+
 // require dotenv
 require("dotenv").config();
 
@@ -14,9 +15,9 @@ function fetchAnimals(e) {
   const animal = document.querySelector("#animal").value;
   const zip = document.querySelector("#zip").value;
 
-   // Validate Zip
-   if (!isValidZip(zip)) {
-    showAlert('Please Enter A Valid Zipcode', 'danger');
+  // Validate Zip
+  if (!isValidZip(zip)) {
+    showAlert("Please Enter A Valid Zipcode", "danger");
     return;
   }
 
