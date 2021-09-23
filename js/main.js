@@ -43,7 +43,7 @@ function fetchAnimals(e) {
     .then((data) => {
       token = data.access_token;
     })
-    .then((res2) => {
+    .then(() => {
       // use token to fetch animals
       fetch(
         `https://api.petfinder.com/v2/animals?type=${animal}&location=${zip}`,
@@ -56,7 +56,7 @@ function fetchAnimals(e) {
           },
         }
       )
-        .then((res3) => res3.json())
+        .then((res) => res.json())
         .then((data) => showAnimals(data.animals));
     })
     .catch((err) => console.error(err));
@@ -71,7 +71,7 @@ function showAnimals(pets) {
 
   // loop through pets
   pets.forEach((pet) => {
-    console.log(pet);
+    /* console.log(pet); */
     // create elements
     const div = document.createElement("div");
     div.classList.add("card", "card-body", "mb-3");

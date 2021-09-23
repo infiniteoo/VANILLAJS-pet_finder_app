@@ -890,7 +890,7 @@ function fetchAnimals(e) {
     return res.json();
   }).then(function (data) {
     token = data.access_token;
-  }).then(function (res2) {
+  }).then(function () {
     // use token to fetch animals
     fetch("https://api.petfinder.com/v2/animals?type=".concat(animal, "&location=").concat(zip), {
       method: "GET",
@@ -899,8 +899,8 @@ function fetchAnimals(e) {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token
       }
-    }).then(function (res3) {
-      return res3.json();
+    }).then(function (res) {
+      return res.json();
     }).then(function (data) {
       return showAnimals(data.animals);
     });
@@ -916,8 +916,8 @@ function showAnimals(pets) {
   results.innerHTML = ""; // loop through pets
 
   pets.forEach(function (pet) {
-    console.log(pet); // create elements
-
+    /* console.log(pet); */
+    // create elements
     var div = document.createElement("div");
     div.classList.add("card", "card-body", "mb-3");
     div.innerHTML = "\n      <div class=\"row\">\n        <div class=\"col-sm-6\">\n          <h4>".concat(pet.name, " (").concat(pet.age, ")</h4>\n          <p class=\"text-secondary\">").concat(pet.breeds.primary, "</p>\n          <p>").concat(pet.contact.address.city, ", ").concat(pet.contact.address.state, " ").concat(pet.contact.address.postcode, "</p>\n          <ul class=\"list-group\">\n            <li class=\"list-group-item\">").concat(pet.contact.phone ? "<li class=\"list-group-item\">Phone: ".concat(pet.contact.phone, "</li>") : "", "</li>\n            ").concat(pet.contact.email ? "<li class=\"list-group-item\">Email: ".concat(pet.contact.email, "</li>") : "", "\n            <li class=\"list-group-item\">Shelter ID: ").concat(pet.organization_id, "</li>\n          </ul>\n        \n        </div>\n        <div class=\"col-sm-6\">\n        <img class=\"img-fluid rounded-circle mt-2\" src=\"").concat(pet.photos[0] ? pet.photos[0].medium : "", "\">\n\n        </div>\n      </div>\n\n    ");
